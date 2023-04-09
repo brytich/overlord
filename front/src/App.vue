@@ -2,6 +2,7 @@
   <div>
     <InscriptionForm />
     <ConnexionForm />
+    <router-view />
   </div>
 </template>
 

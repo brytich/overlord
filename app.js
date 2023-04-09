@@ -1,15 +1,22 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const authRoutes = require('./back/authentication/routes');
-
 const app = express();
+const cors = require('cors');
 
-// Middlewares
-app.use(bodyParser.json());
+// Ajouter cette ligne après l'initialisation de votre application Express
 app.use(cors());
 
-app.use('/auth', authRoutes);
+const port = 3000;
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+// Import des routes
+const authRoutes = require('./back/authentication/authRoutes.js');
+
+// Middleware pour parser le corps des requêtes en JSON
+app.use(express.json());
+
+// Routes de l'API
+app.use('/api/auth', authRoutes); // Toutes les routes de authRoutes commencent par /api/auth
+
+// Démarrage du serveur
+app.listen(port, () => {
+  console.log(`Serveur démarré sur le port ${port}`);
+});
